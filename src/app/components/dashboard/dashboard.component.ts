@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   products = [];
   editingProduct: Product;
   
+  step = 0;
 
   constructor(
     public productService: ProductService,
@@ -38,5 +39,17 @@ export class DashboardComponent implements OnInit {
   editProduct(event, product){
     this.editingProduct = product;
     
+  }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
   }
 }
