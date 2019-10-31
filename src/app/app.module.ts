@@ -17,11 +17,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 //Firebase
 import { AngularFireModule } from '@angular/fire' //Conectrase a firebase
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatPasswordStrengthModule,
+    MatExpansionModule
   ],
   entryComponents:[AddProductComponent],
   providers: [MatDialog],

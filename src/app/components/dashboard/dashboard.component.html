@@ -2,22 +2,45 @@
   <mat-icon>add</mat-icon>
 </button>
 
+<!--
 <div *ngIf="products.length > 0; else noproducts">
   <ul>
     <li *ngFor="let p of products">
-      {{p.servicio}} <br/>
-      {{p.password}} <br/>
+      {{p.servicio}} <br />
+      {{p.password}} <br />
       <button (click)="deleteProduct($event, p)">
         Delete
       </button>
       <button (click)="editProduct($event, p)">
-          Edit
+        Edit
       </button>
     </li>
   </ul>
+</div>
+-->
 
+
+<div *ngIf="products.length > 0; else noproducts">
+  <mat-accordion *ngFor="let p of products">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{p.servicio}}
+        </mat-panel-title>
+        
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input matInput placeholder="First name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Age">
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
 
+
 <ng-template #noproducts>
-  <p>Aun no hay productos</p>
+  <p>Aun no hay Servicios</p>
 </ng-template>
