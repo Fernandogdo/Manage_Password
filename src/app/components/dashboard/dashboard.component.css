@@ -34,12 +34,6 @@
     z-index: 2400;
 }
 
-.accordion{
-    min-width: 150px;
-    max-width: 170px;
-    width: 50%;   
-}
-
 .example-headers-align .mat-expansion-panel-header-title,
 .example-headers-align .mat-expansion-panel-header-description {
   flex-basis: 0;
@@ -53,4 +47,3 @@
 mat-form-field {
   margin-right: 12px;
 }
-

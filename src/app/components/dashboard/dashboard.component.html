@@ -31,13 +31,8 @@
         </mat-panel-title>
         <mat-panel-description>
           Type your name and age
-          <button (click)="deleteProduct($event, p)">
-            <mat-icon>delete</mat-icon>
-
-          </button>
-          <button (click)="editProduct($event, p)">
-            <mat-icon>edit</mat-icon>
-          </button>
+          <mat-icon (click)="deleteProduct($event, p)">delete</mat-icon>
+          <mat-icon (click)="editProduct($event, p)">edit</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
