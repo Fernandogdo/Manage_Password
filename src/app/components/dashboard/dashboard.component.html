@@ -2,50 +2,62 @@
   <mat-icon>add</mat-icon>
 </button>
 
-<!--
-<div *ngIf="products.length > 0; else noproducts">
-  <ul>
-    <li *ngFor="let p of products">
-      {{p.servicio}} <br />
-      {{p.password}} <br />
-      <button (click)="deleteProduct($event, p)">
-        Delete
-      </button>
-      <button (click)="editProduct($event, p)">
-        Edit
-      </button>
-    </li>
-  </ul>
-</div>
--->
-
-
-
-
-<div *ngIf="products.length > 0; else noproducts">
+<div *ngIf="products.length > 0; else noproducts" class="tarjeta">
   <mat-accordion *ngFor="let p of products" class="example-headers-align">
     <mat-expansion-panel hideToggle>
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header class="tarjetaCabecera">
         <mat-panel-title>
           {{p.servicio}}
         </mat-panel-title>
         <mat-panel-description>
-          Type your name and age
+          Gestiona tu contrasena
           <mat-icon (click)="deleteProduct($event, p)">delete</mat-icon>
-          <mat-icon (click)="editProduct($event, p)">edit</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-
-      <mat-form-field>
-        <input matInput placeholder="First name">
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput type="number" min="1" placeholder="Age">
-      </mat-form-field>
+      <li>
+        Servicio | {{p.servicio}}
+      </li> <br />
+      <li>
+        Usuario | {{p.usuario}}
+      </li> <br />
+      <li>
+        Contrasena | {{p.password}}
+      </li>
+      <div class="example-button-row">
+        <button mat-raised-button color="primary" (click)="editProduct($event, p)">
+          Editar
+        </button>
+        <button mat-raised-button color="warn" (click)="deleteProduct($event, p)">
+          Eliminar
+        </button>
+        <!--FORMULARIO PARA EDITAR-->
+        <div *ngIf="editing && editingProduct.id == p.id" class="formEditar">
+          <h2 mat-dialog-title>Editar Servicio</h2>
+          <mat-dialog-content fxLayout="column">
+            <form (ngSubmit)="updateProduct(product)">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" name="servicio" [(ngModel)]="editingProduct.servicio">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" name="usuario" [(ngModel)]="editingProduct.usuario">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" name="password" [(ngModel)]="editingProduct.password"
+                  [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+              <mat-dialog-actions>
+                <button mat-raised-button color="accent" type="submit">Actualizar</button>
+              </mat-dialog-actions>
+            </form>
+          </mat-dialog-content>
+        </div>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
-
 </div>
 
 <ng-template #noproducts>

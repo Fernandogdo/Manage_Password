@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { AddProductComponent } from '../add-product/add-product.component';
+import { LoginComponent } from '../login/login.component'
 import { ProductService } from '../../services/product.service'
 import { Product } from '../../models/product';
 
@@ -12,9 +13,12 @@ import { Product } from '../../models/product';
 export class DashboardComponent implements OnInit {
 
   dialogRoom: MatDialogRef<AddProductComponent>;
+  dialogRoom1: MatDialogRef<LoginComponent>;
   products = [];
-  editingProduct: Product;
+  editing: boolean =false;
+  editingProduct: Product; //Variable para editar producto
   
+   
   step = 0;
 
   constructor(
@@ -37,8 +41,16 @@ export class DashboardComponent implements OnInit {
   }
 
   editProduct(event, product){
+    this.editing =!this.editing;
     this.editingProduct = product;
-    
+    console.log(product);
+
+  }
+
+  updateProduct() {
+    this.productService.updateProduct(this.editingProduct);
+    this.editingProduct = {} as Product;
+    this.editing = false;
   }
 
   setStep(index: number) {

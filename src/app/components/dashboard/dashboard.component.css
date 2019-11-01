@@ -7,33 +7,6 @@
     z-index: 2400;
 }
 
-.btn-agregarFB{
-    position: fixed;
-    left: 95%;
-    right: 0%;
-    bottom: 0%;
-    top: 80%;
-    z-index: 2400;
-}
-
-.btn-agregarGoogle{
-    position: fixed;
-    left: 95%;
-    right: 0%;
-    bottom: 0%;
-    top: 72%;
-    z-index: 2400;
-}
-
-.btn-agregarTwitter{
-    position: fixed;
-    left: 95%;
-    right: 0%;
-    bottom: 0%;
-    top: 64%;
-    z-index: 2400;
-}
-
 .example-headers-align .mat-expansion-panel-header-title,
 .example-headers-align .mat-expansion-panel-header-description {
   flex-basis: 0;
@@ -46,4 +19,20 @@
 
 mat-form-field {
   margin-right: 12px;
+}
+
+/* .tarjeta{
+  min-width: 500px;
+  max-width: 270px;
+  width: 100%;
+} */
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+  margin-top: 10px;
+}
+
+.tarjetaCabecera{
+  background-color: azure;
 }

@@ -16,7 +16,7 @@ export class ProductService {
   constructor(public db: AngularFirestore) {
     // this.products = this.db.collection('products').valueChanges();
     this.productsCollection = this.db.collection('products');
-    this.products = this.productsCollection.snapshotChanges().pipe(map(actions => {
+    this.products = this.productsCollection.snapshotChanges().pipe(map(actions => { //Actualizacion de datos cuando cambian
       return actions.map(a => {
         const data = a.payload.doc.data() as Product;
         data.id = a.payload.doc.id;
@@ -36,6 +36,12 @@ export class ProductService {
   deleteProduct(product: Product){
     this.productDoc = this.db.doc(`products/${product.id}`);
     this.productDoc.delete();
+  }
+
+  updateProduct(product: Product) {
+    this.productDoc = this.db.doc(`products/${product.id}`);
+    this.productDoc.update(product);
+    console.log('actualizao')
   }
 }
 
