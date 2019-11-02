@@ -3,4 +3,5 @@ export interface Product {
     servicio?: string;
     usuario?: string;
     password?: string;
+    idUser?: string;
 }
