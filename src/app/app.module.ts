@@ -18,7 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 //Firebase
 import { AngularFireModule } from '@angular/fire' //Conectrase a firebase
 import { environment } from '../environments/environment';
@@ -46,7 +46,8 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
     FormsModule,
     MatInputModule,
     MatPasswordStrengthModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSnackBarModule
   ],
   entryComponents:[AddProductComponent],
   providers: [MatDialog],

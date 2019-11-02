@@ -4,6 +4,8 @@ import { AddProductComponent } from '../add-product/add-product.component';
 import { LoginComponent } from '../login/login.component'
 import { ProductService } from '../../services/product.service'
 import { Product } from '../../models/product';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -15,15 +17,16 @@ export class DashboardComponent implements OnInit {
   dialogRoom: MatDialogRef<AddProductComponent>;
   dialogRoom1: MatDialogRef<LoginComponent>;
   products = [];
-  editing: boolean =false;
+  editing: boolean = false;
   editingProduct: Product; //Variable para editar producto
-  
-   
+
+
   step = 0;
 
   constructor(
     public productService: ProductService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -40,11 +43,10 @@ export class DashboardComponent implements OnInit {
     this.productService.deleteProduct(product);
   }
 
-  editProduct(event, product){
-    this.editing =!this.editing;
-    this.editingProduct = product;
-    console.log(product);
-
+  editProduct(event, product) {
+    this.editing = !this.editing;
+    this.editingProduct = product; 
+    // console.log(product);
   }
 
   updateProduct() {
@@ -53,15 +55,7 @@ export class DashboardComponent implements OnInit {
     this.editing = false;
   }
 
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
+  ActualizarSnackBar(message, action) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 }
