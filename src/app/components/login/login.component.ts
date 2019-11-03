@@ -1,6 +1,5 @@
 import {
-  Component, OnInit, ChangeDetectionStrategy,
-  ViewEncapsulation
+  Component, OnInit
 } from "@angular/core";
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -66,6 +65,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.buildForm();
   }
 
   /* Validador robuztez contraseña */
