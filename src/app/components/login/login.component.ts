@@ -14,9 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  /* Password-strength */
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class LoginComponent implements OnInit {
 
@@ -66,12 +64,13 @@ export class LoginComponent implements OnInit {
       { type: 'pattern', message: 'You must accept terms and conditions' }
     ]
   }
+
+  ngOnInit() {
+  }
+
   /* Validador robuztez contraseña */
   onStrengthChanged(strength: number) {
     console.log('password strength = ', strength);
-  }
-
-  ngOnInit() {
   }
 
   /* Validador de formulario */
@@ -89,7 +88,7 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      clave: ['', Validators.required, ],
+      clave: ['', Validators.required,],
       pin: ['', Validators.required,]
     });
   }
