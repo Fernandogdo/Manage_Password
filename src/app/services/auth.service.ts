@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
 // Firebase
-import { auth, User } from 'firebase/app';
+import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {
   AngularFirestore,
@@ -12,7 +12,11 @@ import {
 
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
+
+import { Usuario } from '../models/usuario';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +24,7 @@ import { map, switchMap } from 'rxjs/operators';
 export class AuthService {
 
   public isLogged: any = false;
+  public user: Observable<Usuario>;
 
   constructor(
     private toastr: ToastrService,
@@ -27,16 +32,27 @@ export class AuthService {
     private fAuth: AngularFireAuth,
     private fFirestore: AngularFirestore,
 
-  ) { }
+  ) {
+    //Comprueba si el usuario existe en Firestore
+    this.user = this.fAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.fFirestore.doc<Usuario>(`usuario/${user.uid}`).valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    )
+  }
 
   mensajeExito(titulo, mensaje) {
     this.toastr.success(mensaje, titulo);
   }
-  mensajeError(titulo, mensaje){
+  mensajeError(titulo, mensaje) {
     this.toastr.error(mensaje, titulo);
   }
 
-  loginCorreo(data) {
+  loginCorreo(data: any) {
     return new Promise((resolve, reject) => {
       this.fAuth.auth.signInWithEmailAndPassword(data.correo, data.clave).
         then(userData => resolve(userData),
@@ -45,10 +61,10 @@ export class AuthService {
   }
 
   /* Metodo para salir de la cuenta */
-  logout() {
+  logout(){
     return this.fAuth.auth.signOut().then(() => {
       console.log('sign out')
-      this.router.navigate(['/register']);
+      this.router.navigate(['/login']);
     });
   }
 
@@ -59,11 +75,10 @@ export class AuthService {
       .catch((error) => console.log(error))
   }
 
-  
+
   registerUser(userForm) {
     // Asigna valor del formulario a variable
     const usuarioForm = userForm;
-
     return new Promise((resolve, reject) => {
       // Registra al usuario en Authentication
       this.fAuth.auth.createUserWithEmailAndPassword(userForm.correo, userForm.clave)
@@ -78,19 +93,19 @@ export class AuthService {
     });
   }
 
-   // Metodo que regisrado un usuario en firestore
-   private createUserRegisterBD(user, userForm) {
+  // Metodo que regisrado un usuario en firestore
+  private createUserRegisterBD(user: any, userForm) {
     // si se registra por el formulario de registro asigna valor a la variable formulario,
     const usuarioForm = userForm;
-    //const formulario = (usuarioForm) ? usuarioForm : undefined;
-    const userRef: AngularFirestoreDocument<User> = this.fFirestore.doc(`usuario/${user.uid}`);
-    const data: User = {
+    const userRef: AngularFirestoreDocument<Usuario> = this.fFirestore.doc(`usuario/${user.uid}`);
+    const data: Usuario = {
       uid: user.uid,
       correo: user.email,
+      clave: usuarioForm.clave,
+      pin: usuarioForm.pin
     }
     userRef.set(data, { merge: true }).then(() => {
       this.mensajeExito('Exito!', 'Usuario registrado correctamente');
-      // Crea la coleccion Empresa despues del registro de Usuario
       this.router.navigate(['/dashboard']);
     });
   }

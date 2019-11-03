@@ -1,23 +1,117 @@
-<h2>Login</h2>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
-        </div>
+<h1>holaaaaaaaaaaaaaaaaa</h1>
+<div class="container">
+    <div class="row">
+        <mat-tab-group mat-align-tabs="center">
+            <!-- Login -->
+            <mat-tab label="Login">
+
+                <form class="example-container mt-4" [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="on">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" formControlName="correo" required placeholder="Email" autofocus>
+                        <mat-error *ngFor="let validation of account_validation_messages.correo">
+                            <mat-error class="error-message" *ngIf="loginForm.get('correo').hasError(validation.type) && (loginForm.get('correo').dirty || loginForm.get('correo').touched)">
+                                {{validation.message}}</mat-error>
+                        </mat-error>
+                        <mat-icon matSuffix>email</mat-icon>
+                    </mat-form-field>
+
+                    <!--Password -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Contraseña</mat-label>
+                        <mat-pass-toggle-visibility #toggle matSuffix>
+                        </mat-pass-toggle-visibility>
+                        <input matInput [type]="toggle.type" formControlName="clave" required placeholder="Password">
+                    </mat-form-field>
+
+                    <!-- Logeo -->
+                    <mat-card-actions class="text-center">
+                        <button class="btn btn-success btn-block" type="submit" [disabled]='!loginForm.valid'>Enviar</button><br>
+                    </mat-card-actions>
+                </form>
+
+
+                <!-- Reset Password -->
+                <button class="btn btn-link btn-warning mr-1" (click)="passReset = !passReset">¿Olvidó
+          su contraseña?</button>
+                <mat-form-field appearance="outline" *ngIf="passReset">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" [(ngModel)]="correoReset" [formControl]="emailFormControl" required placeholder="Email">
+                    <mat-icon matSuffix>email</mat-icon>
+                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <button class="btn btn-warning" *ngIf="passReset" (click)="resetPassword(correoReset)">Resetear
+          Contraseña </button>
+
+
+            </mat-tab>
+
+            <!-- Formulario Registro -->
+            <mat-tab label="Registro">
+                <form class="example-container mt-4" [formGroup]="registroForm" (ngSubmit)="registro()" autocomplete="on">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Correo</mat-label>
+                        <input matInput type="email" formControlName="correo" required>
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-error *ngFor="let validation of account_validation_messages.correo">
+                            <mat-error class="error-message" *ngIf="registroForm.get('correo').hasError(validation.type) && (registroForm.get('correo').dirty || registroForm.get('correo').touched)">
+                                {{validation.message}}</mat-error>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <br>
+
+                    <!-- Password -->
+                    <mat-slide-toggle #toggleDetalle>Mostrar Detalles Password
+                    </mat-slide-toggle>
+
+                    <mat-form-field appearance="outline" hintLabel="Min. 8 characters" [color]="passwordComponent.color">
+                        <mat-label>Contraseña</mat-label>
+                        <mat-pass-toggle-visibility #toggleVisbility matSuffix>
+                        </mat-pass-toggle-visibility>
+                        <input matInput #password formControlName="clave" type="password" [type]="toggleVisbility.type" placeholder="Password">
+                        <mat-hint align="end" aria-live="polite">
+                            {{password.value.length}} / {{passwordComponent.max}}
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <!-- Validador password -->
+                    <mat-password-strength #passwordComponent [min]="8" [max]="20" (onStrengthChanged)="onStrengthChanged($event)" [password]="password.value">
+                    </mat-password-strength>
+
+                    <!--Password info requeriments-->
+                    <mat-password-strength-info *ngIf="toggleDetalle.checked" [passwordComponent]="passwordComponent" [enableScoreInfo]="true" lowerCaseCriteriaMsg="Contiene al menos un carácter en mínuscula" upperCaseCriteriaMsg="Contiene al menos un carácter en mayúscula"
+                        digitsCriteriaMsg="Contiene al menos un carácter numérico" specialCharsCriteriaMsg="Contiene al menos un carácter especial" minCharsCriteriaMsg="Contiene al menos 8 carácteres">
+                    </mat-password-strength-info>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Pin</mat-label>
+                        <input matInput #postalCode maxlength="4" formControlName="pin" placeholder="Pin">
+                        <mat-hint align="end">{{postalCode.value.length}} / 4</mat-hint>
+                        <mat-icon matSuffix>postal</mat-icon>
+                        <mat-error *ngFor="let validation of account_validation_messages.correo">
+                            <mat-error class="error-message" *ngIf="registroForm.get('correo').hasError(validation.type) && (registroForm.get('correo').dirty || registroForm.get('correo').touched)">
+                                {{validation.message}}</mat-error>
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <!-- Boton Registro-->
+                    <mat-card-actions>
+                        <button class="btn btn-success btn-block" type="submit" [disabled]="!registroForm.valid">Registrarme</button>
+                    </mat-card-actions>
+                    <br>
+
+
+                </form>
+            </mat-tab>
+
+        </mat-tab-group>
     </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">Login</button>
-        <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-        />
-        <a routerLink="/register" class="btn btn-link">Register</a>
-    </div>
-</form>
+</div>

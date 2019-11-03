@@ -1,0 +1,23 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-container>* {
+    width: 100%;
+}
+
+.mat-radio-button~.mat-radio-button {
+    margin-left: 16px;
+}
+
+.mat-tab-labels {
+    background: black;
+    border-radius: 25px;
+}
+
+.mat-tab-label-content {
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+}
