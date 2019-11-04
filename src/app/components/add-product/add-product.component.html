@@ -1,11 +1,14 @@
 <h2 mat-dialog-title>Agregar Contrasena</h2>
 <mat-dialog-content fxLayout="column">
-    <form class="example-form">
+    <form class="example-form" (ngSubmit)="addProduct('Servicio Guardado', 'Descartar')">
         <mat-form-field class="example-full-width">
             <input matInput placeholder="Ingrese el Servicio" name="servicio" [(ngModel)]="product.servicio">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <input matInput placeholder="Ingrese el Usuario" name="usuario" [(ngModel)]="product.usuario">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Ingrese el PIN" name="usuario" [(ngModel)]="product.pin">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -16,9 +19,14 @@
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
         </mat-form-field>
+        <div class="botones">
+            <button mat-raised-button color="primary" type="button" mat-dialog-close>Cancelar</button>
+            <button mat-raised-button color="primary" type="submit" (click)="convertText('encrypt')" mat-dialog-close>Guardar</button>
+        </div>
     </form>
 </mat-dialog-content>
-<mat-dialog-actions [attr.align]="'end'">
-    <button mat-raised-button color="primary" type="button" mat-dialog-close>Cancelar</button>
-    <button mat-raised-button color="primary" type="submit" (click)="addProduct('Servicio Guardado', 'Descartar') " mat-dialog-close>Guardar</button>
-</mat-dialog-actions>
+<!-- <textarea>
+    {{conversionEncryptOutput}}
+</textarea> -->
+
+<!-- <app-dashboard conversionEncryptOutput ="{{product.password}}"></app-dashboard> -->

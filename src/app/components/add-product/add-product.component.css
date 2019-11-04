@@ -1,9 +1,13 @@
 .example-form {
     min-width: 150px;
-    max-width: 170px;
+    max-width: 175px;
     width: 100%;
   }
   
   .example-full-width {
     width: 100%;
+  }
+
+  .botones{
+    margin: 0px 0px 0px 2px;
   }

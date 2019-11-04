@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { LoginComponent } from '../login/login.component'
 import { ProductService } from '../../services/product.service'
 import { Product } from '../../models/product';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +13,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
+  conversionDecryptOutput: string;
+  product = {} as Product;
 
   dialogRoom: MatDialogRef<AddProductComponent>;
   dialogRoom1: MatDialogRef<LoginComponent>;
@@ -45,7 +48,7 @@ export class DashboardComponent implements OnInit {
 
   editProduct(event, product) {
     this.editing = !this.editing;
-    this.editingProduct = product; 
+    this.editingProduct = product;
     // console.log(product);
   }
 
@@ -56,6 +59,12 @@ export class DashboardComponent implements OnInit {
   }
 
   ActualizarSnackBar(message, action) {
-    this._snackBar.open(message, action, {duration: 2000});
+    this._snackBar.open(message, action, { duration: 2000 });
+  }
+
+  desencriptar(conversion: string) {
+    if (conversion = "decrypt") {
+      this.conversionDecryptOutput = CryptoJS.AES.decrypt(this.product.password.trim(), this.product.pin.trim()).toString(CryptoJS.enc.Utf8);
+    }
   }
 }

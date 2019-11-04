@@ -19,13 +19,15 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 //Services
 import { AuthService } from './services/auth.service';
 import { ToastrModule } from 'ngx-toastr';
+import { ProductService } from './services/product.service';
 
 //Firebase
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire' //Conectrase a firebase
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { ProductService } from './services/product.service';
+
+
 
 
 

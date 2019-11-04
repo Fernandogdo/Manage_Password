@@ -23,12 +23,19 @@
       <li>
         Contrasena | {{p.password}}
       </li>
+      <!-- <li>
+        PIN | {{p.pin}}
+      </li> -->
+      
       <div class="example-button-row">
         <button mat-raised-button color="primary" (click)="editProduct($event, p)">
           Editar
         </button>
         <button mat-raised-button color="warn" (click)="deleteProduct($event, p)">
           Eliminar
+        </button>
+        <button mat-raised-button color="accent" (click)="desencriptar('decrypt')">
+          Desencriptar
         </button>
         <!--FORMULARIO PARA EDITAR-->
         <div *ngIf="editing && editingProduct.id == p.id" class="formEditar">
@@ -41,14 +48,15 @@
               <mat-form-field class="example-full-width">
                 <input matInput type="text" name="usuario" [(ngModel)]="editingProduct.usuario">
               </mat-form-field>
-              <mat-form-field class="example-full-width">
+              
+              <!-- <mat-form-field class="example-full-width">
                 <input matInput type="text" name="password" [(ngModel)]="editingProduct.password"
                   [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                   [attr.aria-pressed]="hide">
                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
-              </mat-form-field>
+              </mat-form-field> -->
               <mat-dialog-actions>
                 <button mat-raised-button color="accent" type="submit" (click)= "ActualizarSnackBar('Servicio Actualizado', 'Descartar')" >Actualizar</button>
               </mat-dialog-actions>
