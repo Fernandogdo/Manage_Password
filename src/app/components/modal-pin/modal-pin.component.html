@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>INSERTAR PIN </h2>
+<mat-dialog-content fxLayout="column">
+    <form class="example-form">
+        <mat-form-field>
+            <input matInput placeholder="Texto a desencriptar" name="servicio" [(ngModel)]="product.password">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Ingrese el PIN para desencriptar" name="servicio" [(ngModel)]="product.pin">
+        </mat-form-field>
+        <div class="botones">
+            <button mat-raised-button color="primary" type="submit" (click)="desencriptar('decrypt')">Aceptar</button>
+        </div>
+    </form>
+    <textarea>
+        {{desencriptado}}
+    </textarea>
+</mat-dialog-content>

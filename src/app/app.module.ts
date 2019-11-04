@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { LoginComponent } from './components/login/login.component';
-
+import { ModalPinComponent } from './components/modal-pin/modal-pin.component';
 //Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
@@ -31,12 +31,14 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     LoginComponent,
     AddProductComponent,
+    ModalPinComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     MatPasswordStrengthModule.forRoot(),
 
   ],
-  entryComponents: [AddProductComponent],
+  entryComponents: [AddProductComponent, ModalPinComponent],
   providers: [AuthService, ProductService],
   bootstrap: [AppComponent]
 })

@@ -109,6 +109,12 @@ export class LoginComponent implements OnInit {
     this.authService.registerUser(this.registroForm.value);
   }
 
+
+  /* Metodo para redirigir ruta tras logeo */
+  onLoginRedirect(): void {
+    this.router.navigate(['dashboard']);
+  }
+
   /* Metodo para resetear contraseña usuario */
   resetPassword(emailReset: string) {
     this.authService.resetPassword(emailReset)

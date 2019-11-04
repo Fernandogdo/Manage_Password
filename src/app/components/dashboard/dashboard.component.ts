@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { AddProductComponent } from '../add-product/add-product.component';
-import { LoginComponent } from '../login/login.component'
+import { ModalPinComponent } from '../modal-pin/modal-pin.component'
 import { ProductService } from '../../services/product.service'
+import { AuthService } from '../../services/auth.service'
 import { Product } from '../../models/product';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as CryptoJS from 'crypto-js';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,7 @@ export class DashboardComponent implements OnInit {
   product = {} as Product;
 
   dialogRoom: MatDialogRef<AddProductComponent>;
-  dialogRoom1: MatDialogRef<LoginComponent>;
+  dialogRoom1: MatDialogRef<ModalPinComponent>;
   products = [];
   editing: boolean = false;
   editingProduct: Product; //Variable para editar producto
@@ -28,7 +29,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public productService: ProductService,
+    public authservice: AuthService,
     public dialog: MatDialog,
+    public dialog2: MatDialog,
     private _snackBar: MatSnackBar
   ) { }
 
@@ -40,6 +43,10 @@ export class DashboardComponent implements OnInit {
 
   ModalProduct() {
     this.dialogRoom = this.dialog.open(AddProductComponent);
+  }
+
+  ModalPin(){
+    this.dialogRoom1 = this.dialog2.open(ModalPinComponent);
   }
 
   deleteProduct(event, product) {
@@ -62,9 +69,7 @@ export class DashboardComponent implements OnInit {
     this._snackBar.open(message, action, { duration: 2000 });
   }
 
-  desencriptar(conversion: string) {
-    if (conversion = "decrypt") {
-      this.conversionDecryptOutput = CryptoJS.AES.decrypt(this.product.password.trim(), this.product.pin.trim()).toString(CryptoJS.enc.Utf8);
-    }
-  }
+  salir(event, action){
+    this.authservice.logout();
+      }
 }
