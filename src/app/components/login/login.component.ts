@@ -111,7 +111,7 @@ export class LoginComponent implements OnInit {
 
   /* Metodo para redirigir ruta tras logeo */
   onLoginRedirect(): void {
-    this.router.navigate(['home']);
+    this.router.navigate(['dashboard']);
   }
   /* Metodo para resetear contraseña usuario */
   resetPassword(emailReset: string) {

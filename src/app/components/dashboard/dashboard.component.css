@@ -1,3 +1,23 @@
+#salir {
+    position: relative;
+    left: 75%;
+    color: azure;
+}
+
+#contenedor {
+  margin-top: 2%;
+  position: relative;
+}
+
+#btnAgregar {
+  left: 10%;
+  margin-top: -10%;
+}
+
+#tarjeta {
+  margin-top: 1%;
+}
+
 .btn-agregarChat{
     position: fixed;
     left:95%;

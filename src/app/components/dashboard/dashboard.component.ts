@@ -3,9 +3,10 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { ModalPinComponent } from '../modal-pin/modal-pin.component'
 import { ProductService } from '../../services/product.service'
+import { AuthService } from '../../services/auth.service'
 import { Product } from '../../models/product';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as CryptoJS from 'crypto-js';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public productService: ProductService,
+    public authservice: AuthService,
     public dialog: MatDialog,
     public dialog2: MatDialog,
     private _snackBar: MatSnackBar
@@ -66,4 +68,8 @@ export class DashboardComponent implements OnInit {
   ActualizarSnackBar(message, action) {
     this._snackBar.open(message, action, { duration: 2000 });
   }
+
+  salir(event, action){
+    this.authservice.logout();
+      }
 }
