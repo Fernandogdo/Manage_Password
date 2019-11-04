@@ -15,6 +15,12 @@ const routes: Routes = [
     component: DashboardComponent
     //canActivate: [AuthGuard]
   },
+  {
+    path: "dashboard/:id",
+    component: DashboardComponent
+    //canActivate: [AuthGuard]
+  },
+
   { path: "login", component: LoginComponent },
 ];
 

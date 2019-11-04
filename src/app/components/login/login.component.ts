@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
     this.authService.loginCorreo(this.loginForm.value).then((res) => {
       console.log('resUser', res);
       this.authService.mensajeExito('¡Éxito!', 'Acceso al sistema.');
-      this.onLoginRedirect();
+      this.router.navigate(['dashboard/']);
     }).catch(err => {
       this.authService.mensajeError('¡Error!', '¡Los campos ingresados son incorrectos o no existe una cuenta registrada!');
       console.log('Algo salio mal :/ :', err.message);
@@ -109,10 +109,6 @@ export class LoginComponent implements OnInit {
     this.authService.registerUser(this.registroForm.value);
   }
 
-  /* Metodo para redirigir ruta tras logeo */
-  onLoginRedirect(): void {
-    this.router.navigate(['home']);
-  }
   /* Metodo para resetear contraseña usuario */
   resetPassword(emailReset: string) {
     this.authService.resetPassword(emailReset)

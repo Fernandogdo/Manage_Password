@@ -45,6 +45,11 @@ export class AuthService {
     )
   }
 
+  //Obtiene un usuario
+  public getUsuario(userID: string) {
+    return this.fFirestore.collection('usuario').doc(userID).snapshotChanges();
+  }
+
   mensajeExito(titulo, mensaje) {
     this.toastr.success(mensaje, titulo);
   }
@@ -106,7 +111,7 @@ export class AuthService {
     }
     userRef.set(data, { merge: true }).then(() => {
       this.mensajeExito('Exito!', 'Usuario registrado correctamente');
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['dashboard/', data.uid]);
     });
   }
 
