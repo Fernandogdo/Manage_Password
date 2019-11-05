@@ -89,25 +89,25 @@ export class DashboardComponent implements OnInit {
   getProducts() {
     this.productService.getProducts().subscribe(products => {
       this.products = products;
-      console.log(this.products);
+      //console.log(this.products);
 
     });
 
     this.authservice.getAuth().subscribe(data => {
       this.authservice.getUser(data.uid).subscribe(user => {
         this.idUsuario = data.uid;
-        console.log(this.idUsuario);
+        //console.log(this.idUsuario);
         
         for (let index = 0; index < this.products.length; index++) {
           if (data.uid == this.products[index].idUser) {
             this.productsValidos.push(this.products[index]);
             console.log("producto", this.products[index].idUser);
             //3kUolKKIa5Yrx3yjrMEUg1k8T932
-            console.log(this.productsValidos);
+            
             console.log("Correcto");
 
           } else {
-            console.log("No dashboard");
+            console.log("No Dash");
           }
         }
       })

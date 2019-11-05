@@ -95,6 +95,7 @@ export class AuthService {
         .then(userData => {
           resolve(userData),
             this.idUser = userData.user.uid;
+            this.isLogged = true;
 
         }).catch(err => {
           console.log(reject(err))
@@ -150,6 +151,7 @@ export class AuthService {
     }
     userRef.set(data, { merge: true }).then(() => {
       this.mensajeExito('Exito!', 'Usuario registrado correctamente');
+      this.isLogged = true;
       this.idUser = this.getUsuario(data.uid)
       this.router.navigate(['dashboard/', data.uid]);
     });

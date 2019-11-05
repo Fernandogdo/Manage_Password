@@ -99,7 +99,6 @@ export class LoginComponent implements OnInit {
   }
   /* Registro usuario */
   registro() {
-    console.log(this.registroForm.value)
     this.authService.registerUser(this.registroForm.value);
   }
 
