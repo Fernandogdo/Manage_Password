@@ -6,6 +6,7 @@ import { ProductService } from '../../services/product.service'
 import { AuthService } from '../../services/auth.service'
 import { Product } from '../../models/product';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Usuario } from 'src/app/models/usuario';
 
 
 @Component({
@@ -15,8 +16,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class DashboardComponent implements OnInit {
 
+  private idUsuario;
+
+  productsValidos = [];
+
   conversionDecryptOutput: string;
   product = {} as Product;
+  usuarios = {} as Usuario;
 
   dialogRoom: MatDialogRef<AddProductComponent>;
   dialogRoom1: MatDialogRef<ModalPinComponent>;
@@ -36,9 +42,10 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.productService.getProducts().subscribe(products => {
-      this.products = products;
-    });
+    // this.productService.getProducts().subscribe(products => {
+    //   this.products = products;
+    // });
+    this.getProducts();
   }
 
   ModalProduct() {
@@ -69,7 +76,42 @@ export class DashboardComponent implements OnInit {
     this._snackBar.open(message, action, { duration: 2000 });
   }
 
-  salir(event, action){
+  salir(){
     this.authservice.logout();
-      }
+  }
+
+  copyInputMessage(inputElement){
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+  }
+
+  getProducts() {
+    this.productService.getProducts().subscribe(products => {
+      this.products = products;
+      console.log(this.products);
+
+    });
+
+    this.authservice.getAuth().subscribe(data => {
+      this.authservice.getUser(data.uid).subscribe(user => {
+        this.idUsuario = data.uid;
+        console.log(this.idUsuario);
+        
+        for (let index = 0; index < this.products.length; index++) {
+          if (data.uid == this.products[index].idUser) {
+            this.productsValidos.push(this.products[index]);
+            console.log("producto", this.products[index].idUser);
+            //3kUolKKIa5Yrx3yjrMEUg1k8T932
+            console.log(this.productsValidos);
+            console.log("Correcto");
+
+          } else {
+            console.log("No dashboard");
+          }
+        }
+      })
+    })
+  }
+
 }

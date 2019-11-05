@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material';
 import { ProductService } from '../../services/product.service'
 import { Product } from '../../models/product';
 import * as CryptoJS from 'crypto-js';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-modal-pin',
@@ -13,6 +14,7 @@ export class ModalPinComponent implements OnInit {
 
   desencriptado: string;
   product = {} as Product;
+  usuario = {} as Usuario;
   encryptText: string;
   decPassword: string;
   // editingProduct: Product;

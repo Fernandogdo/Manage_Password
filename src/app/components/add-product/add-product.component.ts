@@ -7,6 +7,8 @@ import { Usuario } from '../../models/usuario';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as CryptoJS from 'crypto-js';
 
+
+
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -14,13 +16,15 @@ import * as CryptoJS from 'crypto-js';
 })
 export class AddProductComponent implements OnInit {
 
-  // @Input() conversionEncryptOutput: string;
-  conversionEncryptOutput: string;
-  conversionDecryptOutput: string;
 
+  private idUser;
+
+  hide: boolean = false;
 
   product = {} as Product;
   usuario = {} as Usuario;
+
+  usuarios = [];
 
   constructor(
     public dialogRef: MatDialogRef<AddProductComponent>,
@@ -30,15 +34,43 @@ export class AddProductComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getUsers();
   }
 
   addProduct(message, action) {
     if (this.product.servicio !== '' && this.product.password !== '') {
+      this.usuario.uid = this.idUser;
+      console.log(this.usuario.uid);
+      
       this.productService.addProduct(this.product);
       this.product = {} as Product;
-      this._snackBar.open(message, action, {duration: 2000});
+      this._snackBar.open(message, action, { duration: 2000 });
     }
   }
+
+  getUsers() {
+    this.authservice.getUsuarios().subscribe(users => {
+      this.usuarios = users;
+    });
+
+    this.authservice.getAuth().subscribe(data => {
+      this.authservice.getUser(data.uid).subscribe(user => {
+        console.log("user :", data.uid);
+        this.idUser = data.uid
+        this.product.idUser = this.idUser;
+        for (let index = 0; index < this.usuarios.length; index++) {
+          if (this.usuarios[index].uid === this.idUser) {
+            // 
+            console.log('encontrado')
+          } else {
+            console.log("No encontrado");
+          }
+        }
+      })
+    })
+  }
+
+
 
   //Metodo para encriptar
   convertText(conversion: string) {

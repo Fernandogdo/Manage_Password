@@ -12,13 +12,13 @@ const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   {
     path: "dashboard",
-    component: DashboardComponent
-    //canActivate: [AuthGuard]
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "dashboard/:id",
-    component: DashboardComponent
-    //canActivate: [AuthGuard]
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
 
   { path: "login", component: LoginComponent },

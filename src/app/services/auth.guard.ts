@@ -16,14 +16,16 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-
     //Guard que comprueba si esta logeado
     if (this.auth.isLogged) {
       return true;
     }
     console.error('¡Accesso denegado! - ¡Necesitas estar logueado!')
-    this.router.navigate(['/register']);
+    this.router.navigate(['/login']);
     return true;
   }
+
+
+  
 
 }

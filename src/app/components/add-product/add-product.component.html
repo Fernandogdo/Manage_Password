@@ -1,19 +1,19 @@
 <h2 mat-dialog-title>Agregar Contrasena</h2>
 <mat-dialog-content fxLayout="column">
-    <form class="example-form" (ngSubmit)="addProduct('Servicio Guardado', 'Descartar')">
+    <form #registroForm class="example-form" (ngSubmit)="addProduct('Servicio Guardado', 'Descartar')">
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Ingrese el Servicio" name="servicio" [(ngModel)]="product.servicio">
+            <input matInput placeholder="Ingrese el Servicio" name="servicio" [(ngModel)]="product.servicio" required>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Ingrese el Usuario" name="usuario" [(ngModel)]="product.usuario">
+            <input matInput placeholder="Ingrese el Usuario" name="usuario" [(ngModel)]="product.usuario" required>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Ingrese el PIN" name="usuario" [(ngModel)]="product.pin">
+            <input matInput placeholder="Ingrese el PIN" name="usuario" [(ngModel)]="product.pin" required>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
             <input matInput placeholder="Ingrese su password" name="password" [(ngModel)]="product.password"
-                [type]="hide ? 'password' : 'text'">
+                [type]="hide ? 'password' : 'text'" required>
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

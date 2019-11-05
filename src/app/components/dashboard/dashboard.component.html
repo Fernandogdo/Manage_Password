@@ -57,19 +57,27 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width">
-                  <input matInput type="text" name="password" [(ngModel)]="editingProduct.password"
-                    [type]="hide ? 'password' : 'text'">
-                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  <input matInput type="text" name="password" [(ngModel)]="editingProduct.password " #userinput
+                    [type]="hide ? 'password' : 'text'" readonly>
+                  <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button>
+                  </button> -->
+                  <!-- <input type="text" value="Enter text to be copied" #userinput > -->
+  
                 </mat-form-field>
                 <mat-dialog-actions>
-                  <button mat-raised-button color="accent" type="submit"
+                  <button class="btnActualizar" mat-raised-button color="primary" type="submit"
                     (click)="ActualizarSnackBar('Servicio Actualizado', 'Descartar')">Actualizar</button>
-                  <button mat-raised-button color="accent" type="submit" (click)="ModalPin()">Desencriptar</button>
                 </mat-dialog-actions>
               </form>
+              
+              <button mat-raised-button color="accent" (click)="copyInputMessage(userinput)" value="click to copy">
+                  Copiar clave
+              </button>
+              <button mat-raised-button color="warn" type="submit" (click)="ModalPin()">
+                Desencriptar
+              </button>
             </mat-dialog-content>
           </div>
         </div>

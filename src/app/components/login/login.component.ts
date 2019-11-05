@@ -66,11 +66,6 @@ export class LoginComponent implements OnInit {
     this.buildForm();
   }
 
-  /* Validador robuztez contraseña */
-  onStrengthChanged(strength: number) {
-    console.log('password strength = ', strength);
-  }
-
   /* Validador de formulario */
   buildForm(): void {
     this.loginForm = this.formbuild.group({
@@ -86,15 +81,14 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      clave: ['', Validators.required,],
-      pin: ['', Validators.required,]
+      clave: ['', Validators.required,]
+      //pin: ['', Validators.required,]
     });
   }
 
   /* Login Correo electronico */
   login() {
     this.authService.loginCorreo(this.loginForm.value).then((res) => {
-      console.log('resUser', res);
       this.authService.mensajeExito('¡Éxito!', 'Acceso al sistema.');
       this.router.navigate(['dashboard/']);
     }).catch(err => {

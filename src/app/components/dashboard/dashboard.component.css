@@ -11,7 +11,7 @@
 
 #btnAgregar {
   left: 10%;
-  margin-top: -10%;
+  
 }
 
 #tarjeta {
@@ -55,4 +55,8 @@ mat-form-field {
 
 .tarjetaCabecera{
   background-color: azure;
+}
+
+.btnActualizar{
+  margin-bottom: 5px;
 }

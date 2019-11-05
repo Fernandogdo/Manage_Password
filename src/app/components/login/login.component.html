@@ -96,8 +96,7 @@
                         </mat-form-field>
 
                         <!-- Validador password -->
-                        <mat-password-strength #passwordComponent [min]="8" [max]="20"
-                            (onStrengthChanged)="onStrengthChanged($event)" [password]="password.value">
+                        <mat-password-strength #passwordComponent [min]="8" [max]="20" [password]="password.value">
                         </mat-password-strength>
 
                         <!--Password info requeriments-->
@@ -109,7 +108,7 @@
                             specialCharsCriteriaMsg="Contiene al menos un carácter especial"
                             minCharsCriteriaMsg="Contiene al menos 8 carácteres">
                         </mat-password-strength-info>
-
+<!-- 
                         <mat-form-field appearance="outline">
                             <mat-label>Pin</mat-label>
                             <input matInput #postalCode maxlength="4" formControlName="pin" placeholder="Pin">
@@ -120,7 +119,7 @@
                                     *ngIf="registroForm.get('correo').hasError(validation.type) && (registroForm.get('correo').dirty || registroForm.get('correo').touched)">
                                     {{validation.message}}</mat-error>
                             </mat-error>
-                        </mat-form-field>
+                        </mat-form-field> -->
 
 
                         <!-- Boton Registro-->
